@@ -1,0 +1,33 @@
+  <div class="container mx-auto px-4">
+    <div>
+      Requirement
+      <div>
+        Ng-zorro antd - https://ng.ant.design/docs/introduce/en
+      </div>
+      <div>
+        TailwindCSS - https://tailwindcss.com/
+      </div>
+    </div>
+    <button nz-button nzType="primary">Primary Button</button>
+      <button nz-button nzType="default">Default Button</button>
+      <button nz-button nzType="dashed">Dashed Button</button>
+      <button nz-button nzType="text">Text Button</button>
+      <a nz-button nzType="link">Link Button</a>
+  </div>
+
+
+
+  <!-- <nz-tree [nzData]="nodes" nzShowLine (nzClick)="nzEvent($event)"></nz-tree> -->
+  <nz-tree [nzData]="nodes" [nzShowLine]="true" (nzClick)="handleNodeClick($event)"></nz-tree>
+<!-- Example HTML template with Tailwind CSS classes -->
+<div class="p-6">
+  <nz-tree [nzData]="nodes" [nzShowLine]="true" class="space-y-2">
+    <ng-template #nzTreeTemplate let-node>
+      <span class="border rounded px-2 py-1 bg-gray-200 hover:bg-gray-300 cursor-pointer">
+        {{ node.title }}
+      </span>
+    </ng-template>
+  </nz-tree>
+</div>
+
+
