@@ -8,3 +8,15 @@
 button {
   margin-bottom: 7px;
 }
+#header-section.main-header {
+  border-bottom: 1px solid #d2d6de;
+
+  min-height: 55px;
+  max-height: 55px;
+  background: #FFFFFF;
+  color: #263238;
+  position: sticky !important;
+  width: 100% !important;
+  top:0;
+  z-index: 999;
+}

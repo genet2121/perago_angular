@@ -1,0 +1,70 @@
+<!-- <nz-sidebar class="dock-menu" nzWidth="200px" [nzCollapsible]="false">
+  <div class="main-menu">
+    <div class="mt-3">
+      <nz-tree
+        #tree
+        [nzData]="data"
+        [nzExpandedKeys]="[]"
+        [nzSelectedKeys]="[]"
+        [nzShowIcon]="true"
+        [nzTreeTemplate]="treeNodeTemplate"
+        (nzClick)="route($event)"
+      >
+        <ng-template #treeNodeTemplate let-node>
+          <span *ngIf="node.iconCss" [class]="node.iconCss" style="margin-right: 8px;"></span>
+          {{ node.nodeText }}
+        </ng-template>
+      </nz-tree>
+    </div>
+  </div>
+</nz-sidebar>
+ -->
+
+ <nz-layout>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="collapseWidth" [nzBreakpoint]="'lg'" [nzTrigger]="triggerTemplate">
+    <!-- Sider content -->
+    <div class="logo">
+
+    </div>
+    <ul nz-menu [nzMode]="'inline'" nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
+      <!-- Menu items -->
+      <!-- Example of menu item with submenu -->
+      <li nz-submenu [(nzOpen)]="openMap.sub1" (nzOpenChange)="openHandler('sub1')">
+        <span title>My Data</span>
+        <ul>
+          <li nz-menu-item routerLinkActive="ant-menu-item-selected" routerLink="/position/create">Overview</li>
+          <li nz-menu-item>Received</li>
+        </ul>
+      </li>
+      <li nz-submenu [(nzOpen)]="openMap.sub2" (nzOpenChange)="openHandler('sub2')">
+        <span title>
+          <i class="anticon anticon-upload"></i>
+          <span>Nav2</span>
+        </span>
+        <ul>
+                  <li nz-menu-item routerLinkActive="ant-menu-item-selected" routerLink="/position/create"><span><i class="anticon anticon-upload"></i><span class="nav-text">nav 2</span></span>
+      </li>
+        </ul>
+        <li nz-menu-item><span><i class="anticon anticon-upload"></i><span class="nav-text">nav 3</span></span></li>
+<li nz-menu-item><span><i class="anticon anticon-upload"></i><span class="nav-text">nav 4</span></span></li>
+
+      <!-- Other menu items -->
+    </ul>
+  </nz-sider>
+
+  <nz-layout style="min-height: 100vh;">
+    <nz-header style="background: #fff; padding: 0;">
+      <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
+    </nz-header>
+    <nz-content style="margin: 24px 16px 0;">
+      <div style="padding: 24px; background: #fff; min-height: 360px;">
+        <!-- Your router outlet content -->
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <!-- nz-footer (if needed) -->
+  </nz-layout>
+</nz-layout>
+
+
+

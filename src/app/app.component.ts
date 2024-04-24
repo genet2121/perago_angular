@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NzFormatEmitEvent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 
 
@@ -14,6 +15,7 @@ interface TreeNode {
 })
 export class AppComponent {
   title = 'perago-angular';
+  constructor( private router: Router){}
   // nodes = [
   //   {
   //     title: 'parent 1',
