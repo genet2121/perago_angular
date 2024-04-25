@@ -20,16 +20,26 @@
 </nz-sidebar>
  -->
 
+
+
  <nz-layout>
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="collapseWidth" [nzBreakpoint]="'lg'" [nzTrigger]="triggerTemplate">
+  <nz-sider
+  nzCollapsible [(nzCollapsed)]="isCollapsed"
+  [nzCollapsedWidth]="collapseWidth"
+  [nzBreakpoint]="'lg'"
+  [nzTrigger]="triggerTemplate">
     <!-- Sider content -->
     <div class="logo">
 
     </div>
-    <ul nz-menu [nzMode]="'inline'" nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
+    <ul nz-menu
+    [nzMode]="'inline'" nzTheme="dark"
+     [nzInlineCollapsed]="isCollapsed">
       <!-- Menu items -->
       <!-- Example of menu item with submenu -->
-      <li nz-submenu [(nzOpen)]="openMap.sub1" (nzOpenChange)="openHandler('sub1')">
+      <li nz-submenu
+      [(nzOpen)]="openMap.sub1"
+      (nzOpenChange)="openHandler('sub1')">
         <span title>My Data</span>
         <ul>
           <li nz-menu-item routerLinkActive="ant-menu-item-selected" routerLink="/position/create">Overview</li>

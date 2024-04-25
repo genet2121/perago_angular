@@ -121,6 +121,9 @@ export class AppComponent {
   handleNodeClick(event: NzFormatEmitEvent): void {
     console.log('Clicked node:', event.node);
   }
+  nzEvent(event: NzFormatEmitEvent): void {
+    console.log(event);
+  }
 }
 
 

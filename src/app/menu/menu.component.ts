@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+openHandler(arg0: string) {
+throw new Error('Method not implemented.');
+}
 
   constructor() { }
 
@@ -18,5 +21,7 @@ export class MenuComponent implements OnInit {
   }
 
 }
+
+
 
 
