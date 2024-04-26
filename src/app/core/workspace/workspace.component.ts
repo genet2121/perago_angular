@@ -4,6 +4,8 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { sideBarMenus } from './side-bar-menus';
 import { Router, NavigationStart, Event as RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+
 export interface OpenMap {
   [key: string]: boolean; // Index signature allowing any string key with boolean value
   sub1: boolean;
@@ -17,7 +19,7 @@ export interface OpenMap {
 export class WorkspaceComponent implements OnInit {
   @ViewChild('trigger') customTrigger?: TemplateRef<void>;
   @ViewChild('trigger') triggerTemplate?: TemplateRef<void>; // Define triggerTemplate
-
+  isCollapsed = false;
   // openMap = {
   //   sub1: true,
   //   sub2: false
@@ -26,7 +28,7 @@ export class WorkspaceComponent implements OnInit {
     sub1: true,
     sub2: false
   };
-  isCollapsed = false;
+
   collapseWidth: number =80;
   constructor(public breakpointObserver: BreakpointObserver, private router: Router) {
     setTimeout(() => {

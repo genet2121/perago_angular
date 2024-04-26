@@ -20,23 +20,79 @@
 </nz-sidebar>
  -->
 
+ <nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar"
+  nzCollapsible
+  [(nzCollapsed)]="isCollapsed"
+  [nzTrigger]="null">
+    <div class="logo">
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-submenu
+      nzTitle="User"
+      nzIcon="user">
+        <ul>
+          <li nz-menu-item>Tom</li>
+          <li nz-menu-item>Bill</li>
+          <li nz-menu-item>Alex</li>
+        </ul>
+      </li>
+      <li nz-submenu
+      nzTitle="Team"
+      nzIcon="team">
+        <ul>
+          <li nz-menu-item
+          routerLinkActive="ant-menu-item-selected"
+          routerLink="/position/create">Team 1</li>
+          <ul>
 
+  </ul>
+          <li nz-menu-item>Team 2</li>
+        </ul>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon
+        nzType="file"></span>
+        <span>File</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <span
+        class="trigger"
+        nz-icon
+        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"
+      ></span>
+    </nz-header>
+    <nz-content>
+      <nz-breadcrumb>
+        <nz-breadcrumb-item>User</nz-breadcrumb-item>
+        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+      </nz-breadcrumb>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
 
- <nz-layout>
+ <!-- <nz-layout>
   <nz-sider
   nzCollapsible [(nzCollapsed)]="isCollapsed"
   [nzCollapsedWidth]="collapseWidth"
   [nzBreakpoint]="'lg'"
   [nzTrigger]="triggerTemplate">
-    <!-- Sider content -->
+    <!-- Sider content
     <div class="logo">
 
     </div>
     <ul nz-menu
     [nzMode]="'inline'" nzTheme="dark"
      [nzInlineCollapsed]="isCollapsed">
-      <!-- Menu items -->
-      <!-- Example of menu item with submenu -->
+      <!-- Menu items
+      <!-- Example of menu item with submenu
       <li nz-submenu
       [(nzOpen)]="openMap.sub1"
       (nzOpenChange)="openHandler('sub1')">
@@ -58,7 +114,7 @@
         <li nz-menu-item><span><i class="anticon anticon-upload"></i><span class="nav-text">nav 3</span></span></li>
 <li nz-menu-item><span><i class="anticon anticon-upload"></i><span class="nav-text">nav 4</span></span></li>
 
-      <!-- Other menu items -->
+      <!-- Other menu items
     </ul>
   </nz-sider>
 
@@ -68,13 +124,13 @@
     </nz-header>
     <nz-content style="margin: 24px 16px 0;">
       <div style="padding: 24px; background: #fff; min-height: 360px;">
-        <!-- Your router outlet content -->
+        <!-- Your router outlet content
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-    <!-- nz-footer (if needed) -->
+    <!-- nz-footer (if needed)
   </nz-layout>
-</nz-layout>
+</nz-layout> -->
 
 
 

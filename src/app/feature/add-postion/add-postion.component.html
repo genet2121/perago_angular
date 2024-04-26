@@ -1,13 +1,54 @@
 
-<nz-tree [nzData]="nodes" nzShowLine (nzClick)="nzEvent($event)"></nz-tree>
+
+
+
+<div nz-row>
+  <div nz-col
+   [nzSpan]="18" [nzPush]="6" >
+
+
+  <app-position-detail></app-position-detail>
+
+  </div>
+  <div class="content"
+  nz-col [nzSpan]="6"
+   [nzPull]="18" >
+   <nz-tree-view [nzTreeControl]="treeControl" [nzDataSource]="dataSource">
+    <nz-tree-node *nzTreeNodeDef="let node" nzTreeNodeIndentLine>
+      <nz-tree-node-toggle nzTreeNodeNoopToggle *ngIf="showLeafIcon">
+        <span nz-icon nzType="file" nzTheme="outline"></span>
+      </nz-tree-node-toggle>
+      <nz-tree-node-option>
+        {{ node.name }}
+      </nz-tree-node-option>
+    </nz-tree-node>
+
+    <nz-tree-node *nzTreeNodeDef="let node; when: hasChild" nzTreeNodeIndentLine>
+      <nz-tree-node-toggle>
+        <span
+          nz-icon
+          [nzType]="treeControl.isExpanded(node) ? 'minus-square' : 'plus-square'"
+          nzTheme="outline"
+        ></span>
+      </nz-tree-node-toggle>
+      <nz-tree-node-option>
+        {{ node.name }}
+      </nz-tree-node-option>
+    </nz-tree-node>
+  </nz-tree-view>
+
+  </div>
+</div>
+
+
 <!-- <nz-tree [nzData]="nodes" [nzShowLine]="true" (nzClick)="handleNodeClick($event)"></nz-tree> -->
 <!-- Example HTML template with Tailwind CSS classes -->
-<div class="p-6">
-<nz-tree [nzData]="nodes" [nzShowLine]="true" class="space-y-2">
-  <ng-template #nzTreeTemplate let-node>
-    <span class="border rounded px-2 py-1 bg-gray-200 hover:bg-gray-300 cursor-pointer">
-      {{ node.title }}
-    </span>
-  </ng-template>
-</nz-tree>
-</div>
+
+<!-- <div nz-row>
+  <div nz-col nzFlex="2">2 / 5</div>
+  <div nz-col nzFlex="3">3 / 5</div>
+</div> -->
+  <!-- <nz-tree
+    [nzData]="nodes" nzShowLine
+    (nzClick)="nzEvent($event)">
+  </nz-tree> -->

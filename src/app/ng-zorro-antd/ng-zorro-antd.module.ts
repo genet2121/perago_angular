@@ -5,6 +5,7 @@ import { NzAnchorModule } from 'ng-zorro-antd/anchor';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
@@ -48,6 +49,8 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
+
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 @NgModule({
@@ -62,8 +65,9 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
     // NzBackTopModule,
     NzBadgeModule,
     NzButtonModule,
-    // NzBreadCrumbModule,
+    NzBreadCrumbModule,
     // NzCalendarModule,
+    NzTreeViewModule,
     NzCardModule,
     NzCarouselModule,
     NzCascaderModule,
