@@ -10,19 +10,19 @@ export class CrudService {
   constructor(private http:HttpClient) { }
 
   fetchPositions(){
-    return this.http.get('https://jsonplaceholder.typicode.com/users');
+    return this.http.get('http://localhost:3000/positions');
   }
 
   addPositions(positionData: any){
-    return this.http.post('https://jsonplaceholder.typicode.com/users',positionData);
+    return this.http.post('http://localhost:3000/positions',positionData);
   }
   deletePosition(id: number): Observable<any> {
-    return this.http.delete('https://jsonplaceholder.typicode.com/users/' + id);
+    return this.http.delete('http://localhost:3000/positions' + id);
   }
 
   updatePosition(
     payload: any,id:number
   ){
-    return this.http.put('https://jsonplaceholder.typicode.com/users/'+id, payload);
+    return this.http.put('http://localhost:3000/positions'+id, payload);
   }
 }

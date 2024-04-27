@@ -11,7 +11,7 @@ export class PositioStateModel {
 }
 
 @State<PositioStateModel>({
-    name: 'appstate',
+    name: 'positionstate',
     defaults: {
       positions: []
     }

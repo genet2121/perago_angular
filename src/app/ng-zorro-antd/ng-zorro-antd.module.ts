@@ -88,6 +88,7 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
     NzInputNumberModule,
     NzLayoutModule,
     NzListModule,
+    NzFormModule ,
     // NzMentionModule,
     NzMenuModule,
     NzMessageModule,

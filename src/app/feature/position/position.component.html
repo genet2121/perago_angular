@@ -1,1 +1,24 @@
-<p>position works!</p>
+<form nz-form [formGroup]="dataForm" (ngSubmit)="addPosition()">
+  <!-- Name Field -->
+  <nz-form-item>
+    <nz-form-label nzRequired>Name</nz-form-label>
+    <nz-form-control nzErrorTip="Name is required" [nzValidateStatus]="getFormControlValidationStatus('name')">
+      <input nz-input formControlName="name" placeholder="Name">
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Description Field -->
+  <nz-form-item>
+    <nz-form-label>Description</nz-form-label>
+    <nz-form-control>
+      <textarea nz-input formControlName="description" placeholder="Description"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Submit Button -->
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button nzType="primary" [disabled]="!dataForm.valid">Submit</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

@@ -7,7 +7,7 @@ import { PositionDetailComponent } from './position-detail/position-detail.compo
 import { PositionComponent } from './position/position.component';
 import { NgxsModule } from '@ngxs/store';
 import { PositionState } from '../core/state/state/position.state';
-
+import { ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   {
   path: 'position/create',
@@ -31,9 +31,11 @@ const routes: Routes = [
   imports: [
     CommonModule,
     NgZorroAntdModule,
+    ReactiveFormsModule,
     NgxsModule.forFeature([PositionState]) ,
     RouterModule.forChild(routes)
 
   ]
+
 })
 export class FeatureModule { }
