@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgZorroAntdModule } from './ng-zorro-antd/ng-zorro-antd.module';
 import { MenuComponent } from './menu/menu.component';
+import { CoreModule } from './core/core.module';
 registerLocaleData(en);
 
 @NgModule({
@@ -22,6 +23,7 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     NgZorroAntdModule,
+    CoreModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
