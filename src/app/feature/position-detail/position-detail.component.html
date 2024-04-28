@@ -11,21 +11,41 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of editRowTable.data" class="editable-row">
+    <tr *ngFor="let data of positionInfo; index as i" class="editable-row">
       <td>
-        <div class="editable-cell" [hidden]="editId === data.id" (click)="startEdit(data.id)">
-          {{ data.name }}
+        <!-- <div class="editable-cell" [hidden]="editId === data.id" (click)="startEdit(data.id)">
+          {{ data.name}}
         </div>
-        <input [hidden]="editId !== data.id" type="text" nz-input ngModel="data.name" (blur)="stopEdit()" />
-
+        <input [hidden]="editId !== data.id" type="text" nz-input ngModel="data.name" (blur)="stopEdit()" /> -->
+{{data.name}}
       </td>
-      <td>{{ data.parentid}}</td>
-      <td>{{ data.description }}</td>
+
       <td>
-        <a style="margin-right: 16px;">Edit</a>
-        <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data.id)">Delete</a>
-
+        {{ data.parentid}}
       </td>
+      <td>{{ data.description }}</td>
+
+      <!-- <td>
+        <button class="btn btn-outline-warning btn-sm" (click)="updatePosition(data.id, i)"><i
+          class="bi bi-pencil-fill"></i></button>
+        <!-- <a style="margin-right: 16px;">Edit</a> -->
+        <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data.id)">Delete</a>
+        <button class="btn btn-danger btn-sm" (click)="deletePosition(data.id)"><i
+          class="bi bi-trash-fill"></i></button>
+      </td> -->
+      <td>
+        <button class="text-yellow-500 hover:bg-yellow-100 text-white font-bold py-2 px-4 rounded" (click)="updatePositionn(data.id)">
+          <i nz-icon nzType="edit" class="text-lg"></i>
+        </button>
+        <button class="text-red-500 hover:bg-red-100 text-white font-bold py-2 px-4 rounded ml-2" (click)="deletePosition(data.id)">
+          <i nz-icon nzType="delete" class="text-lg"></i>
+        </button>
+      </td>
+
+
+
+
     </tr>
   </tbody>
 </nz-table>
+

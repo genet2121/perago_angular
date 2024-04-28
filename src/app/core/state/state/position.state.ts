@@ -50,7 +50,7 @@ export class PositionState {
 
     @Action(UpdatePositions)
     updateDataOfState(ctx: StateContext<PositioStateModel>, { payload, id, i }: UpdatePositions) {
-        return this.crudservice.updatePosition(payload, i).pipe(tap(returnData => {
+        return this.crudservice.updatePosition(payload, id).pipe(tap(returnData => {
             const state=ctx.getState();
 
             const positionList = [...state.positions];

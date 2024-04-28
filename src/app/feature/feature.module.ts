@@ -8,6 +8,8 @@ import { PositionComponent } from './position/position.component';
 import { NgxsModule } from '@ngxs/store';
 import { PositionState } from '../core/state/state/position.state';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
 const routes: Routes = [
   {
   path: 'position/create',
@@ -32,6 +34,7 @@ const routes: Routes = [
     CommonModule,
     NgZorroAntdModule,
     ReactiveFormsModule,
+    FormsModule,
     NgxsModule.forFeature([PositionState]) ,
     RouterModule.forChild(routes)
 

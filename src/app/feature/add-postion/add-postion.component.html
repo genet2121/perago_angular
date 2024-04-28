@@ -10,15 +10,17 @@
   <app-position-detail></app-position-detail>
 
   </div>
+
+
   <div class="content"
   nz-col [nzSpan]="6"
    [nzPull]="18" >
    <nz-tree-view [nzTreeControl]="treeControl" [nzDataSource]="dataSource">
     <nz-tree-node *nzTreeNodeDef="let node" nzTreeNodeIndentLine>
-      <nz-tree-node-toggle nzTreeNodeNoopToggle *ngIf="showLeafIcon">
+      <!-- <nz-tree-node-toggle nzTreeNodeNoopToggle *ngIf="showLeafIcon">
         <span nz-icon nzType="file" nzTheme="outline"></span>
-      </nz-tree-node-toggle>
-      <nz-tree-node-option>
+      </nz-tree-node-toggle> -->
+      <nz-tree-node-option (click)="onNodeClick(node)">
         {{ node.name }}
       </nz-tree-node-option>
     </nz-tree-node>
@@ -31,7 +33,7 @@
           nzTheme="outline"
         ></span>
       </nz-tree-node-toggle>
-      <nz-tree-node-option>
+      <nz-tree-node-option (click)="onNodeClick(node)">
         {{ node.name }}
       </nz-tree-node-option>
     </nz-tree-node>
