@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // Import FormsModule if needed
 import { Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
-
+import { tap } from 'rxjs/operators';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CrudService } from 'src/app/core/crud.service';
-import { DeletePositions, GetPositions, UpdatePositions } from 'src/app/core/state/actions/position.actions';
+import { DeletePositions, FetchPositionById, GetPositions, UpdatePositions } from 'src/app/core/state/actions/position.actions';
 import { PositionState } from 'src/app/core/state/state/position.state';
 import {ItemData} from 'src/app/core/models/data'
 
@@ -15,9 +15,10 @@ import {ItemData} from 'src/app/core/models/data'
   templateUrl: './position-detail.component.html',
   styleUrls: ['./position-detail.component.scss']
 })
-export class PositionDetailComponent implements OnInit {
+export class PositionDetailComponent implements OnInit{
   positionInfo?: ItemData[] ;
   @Select(PositionState.selectStateData) positionInfo$?: Observable<any>
+
 constructor(private router:Router, private store: Store, private crudservice:CrudService){}
 
   i = 0;
@@ -45,8 +46,12 @@ this.router.navigate(['/position/detail'])
     })
     console.log('hhh', this.positionInfo)
     // this.addRow();
+
     // this.addRow();
+
   }
+
+
 
 
   updatePosition(id: number, i: number) {

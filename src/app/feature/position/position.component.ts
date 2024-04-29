@@ -16,12 +16,19 @@ export class PositionComponent implements OnInit {
   dataForm: FormGroup;
   positionInfo?: [] ;
   positionData: any;
+  selectedNodeId: number | null = null;
+
   @Select(PositionState.selectStateData) positionInfo$?: Observable<any>
   constructor(private fb:FormBuilder, private store: Store, private route: ActivatedRoute, private router: Router
   ) {
+    this.route.queryParams.subscribe(params => {
+      this.selectedNodeId = params['nodeId'];
+
+      // Now you can use the nodeId as needed in your component
+    });
     this.dataForm = fb.group({
       id:[],
-      parentId:[''],
+      parentId:[this.selectedNodeId],
       name:['', Validators.required],
       description:['']
     })

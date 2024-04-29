@@ -19,3 +19,16 @@ export class DeletePositions {
   static readonly type = '[Positions] Delete';
   constructor(public id: number) { }
 }
+export class FetchPositionById {
+  static readonly type = '[Positions] Fetch Position By Id';
+  constructor(public id: number) {}
+ }
+// export class FetchPositionById {
+//   static readonly type = '[Positions] Fetch Position By Id';
+//   constructor(public response: any) {}
+// }
+// position.state.actions.ts
+export class SelectNode {
+  static readonly type = '[Position] Select Node';
+  constructor(public nodeId: number) {}
+}

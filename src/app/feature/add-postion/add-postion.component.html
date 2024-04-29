@@ -6,8 +6,53 @@
   <div nz-col
    [nzSpan]="18" [nzPush]="6" >
 
+<!--
+  <app-position-detail></app-position-detail> -->
 
-  <app-position-detail></app-position-detail>
+  <button nz-button (click)="add()" nzType="primary">Add</button>
+<br />
+<br />
+<nz-table #editRowTable nzBordered [nzData]="listOfData">
+  <thead>
+    <tr>
+      <th nzWidth="30%">Name</th>
+      <th>ParentId</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of selectedPositionInfo; index as i" class="editable-row">
+      <td>
+        <!-- <div class="editable-cell" [hidden]="editId === data.id" (click)="startEdit(data.id)">
+          {{ data.name}}
+        </div>
+        <input [hidden]="editId !== data.id" type="text" nz-input ngModel="data.name" (blur)="stopEdit()" /> -->
+{{data.name}}
+      </td>
+
+      <td>
+      {{data.parentId}}
+      </td>
+      <td>{{ data.description }}</td>
+
+      <td>
+        <button class="text-yellow-500 hover:bg-yellow-100  font-bold py-2 px-4 rounded" (click)="updatePositionn(data.id)">
+          <i nz-icon nzType="edit" class="text-lg"></i>
+        </button>
+        <button class="text-red-500 hover:bg-red-100 font-bold py-2 px-4 rounded ml-2" (click)="deletePosition(data.id)">
+          <i nz-icon nzType="delete" class="text-lg"></i>
+        </button>
+      </td>
+
+
+
+
+    </tr>
+  </tbody>
+</nz-table>
+
+
 
   </div>
 

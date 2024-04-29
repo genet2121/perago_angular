@@ -20,6 +20,12 @@ export class WorkspaceComponent implements OnInit {
   @ViewChild('trigger') customTrigger?: TemplateRef<void>;
   @ViewChild('trigger') triggerTemplate?: TemplateRef<void>; // Define triggerTemplate
   isCollapsed = false;
+  showLogo = true;
+
+  toggleMenu() {
+    this.isCollapsed = !this.isCollapsed;
+    this.showLogo = !this.isCollapsed;
+  }
   // openMap = {
   //   sub1: true,
   //   sub2: false

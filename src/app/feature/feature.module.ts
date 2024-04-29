@@ -19,6 +19,13 @@ const routes: Routes = [
   path: 'position/detail',
   component: PositionComponent
 },
+{path:'position/detail/:id',
+  component:PositionComponent
+},
+{
+  path:'position/list',
+  component:PositionDetailComponent
+}
 
 
 

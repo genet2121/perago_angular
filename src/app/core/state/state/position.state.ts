@@ -3,17 +3,21 @@ import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 
 import { tap } from 'rxjs/operators';
-import { AddPositions, DeletePositions, GetPositions, UpdatePositions } from '../actions/position.actions';
+import { AddPositions, DeletePositions, FetchPositionById, GetPositions, UpdatePositions, SelectNode } from '../actions/position.actions';
 
 
 export class PositioStateModel {
   positions: any
+  selectedNodeId?: number | null;
+  selectedPosition:any
+
 }
 
 @State<PositioStateModel>({
     name: 'positionstate',
     defaults: {
-      positions: []
+      positions: [],
+      selectedPosition:[]
     }
 })
 
@@ -25,6 +29,11 @@ export class PositionState {
     static selectStateData(state:PositioStateModel){
         return state.positions;
     }
+    @Selector()
+    static selectSelectedPositionData(state:PositioStateModel){
+        return state.selectedPosition;
+    }
+
 
     @Action(GetPositions)
     getDataFromState(ctx: StateContext<PositioStateModel>) {
@@ -79,4 +88,17 @@ export class PositionState {
             })
         }))
     }
+    @Action(FetchPositionById)
+fetchPositionById(ctx: StateContext<PositioStateModel>, { id }: FetchPositionById) {
+  return this.crudservice.fetchPositionById(id).pipe(tap(returnData => {
+    const state = ctx.getState();
+    // Update the state with the fetched position
+    ctx.setState({
+      ...state,
+      selectedPosition: [returnData]
+      // Assuming the API returns a single position object
+    });
+    console.log('uuuuu',returnData)
+  }));
+}
 }
