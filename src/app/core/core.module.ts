@@ -23,6 +23,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     WorkspaceComponent
+
   ],
   imports: [
     CommonModule,

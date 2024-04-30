@@ -16,3 +16,30 @@ textarea[nz-input] {
   width: 100%;
   height: 120px;
 }
+.attractive-form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.form-control {
+  margin-bottom: 24px;
+}
+
+.input-field {
+  width: 100%;
+}
+
+.error-message {
+  color: #f5222d;
+}
+
+.submit-button {
+  width: 100%;
+}
+.form-title {
+  font-size: 18px;
+  // font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
