@@ -1,4 +1,4 @@
-import { ItemData } from './../../core/models/data';
+import { ItemData } from '../../core/models/data';
 import { Component, OnInit } from '@angular/core';
 import { NzFormatEmitEvent } from 'ng-zorro-antd/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
@@ -26,10 +26,10 @@ interface FlatNode {
 
 @Component({
   selector: 'app-add-postion',
-  templateUrl: './add-postion.component.html',
-  styleUrls: ['./add-postion.component.scss']
+  templateUrl: './position-detail.component.html',
+  styleUrls: ['./position-detail.component.scss']
 })
-export class AddPostionComponent implements OnInit {
+export class PostionDetailComponent implements OnInit {
   positionInfo?: TreeNode[];
   selectedPositionInfo?: TreeNode[];
   @Select(PositionState.selectStateData) positionInfo$?: Observable<TreeNode[]>;

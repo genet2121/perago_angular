@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddPostionComponent } from './add-postion/add-postion.component';
+import { PostionDetailComponent } from './add-postion/position-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgZorroAntdModule } from '../ng-zorro-antd/ng-zorro-antd.module';
 import { PositionComponent } from './position/position.component';
@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 const routes: Routes = [
   {
   path: 'position/detail',
-  component: AddPostionComponent,
+  component: PostionDetailComponent,
   data: { breadcrumb: 'Company/Organizational Structure' }
 },
 {
@@ -31,7 +31,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AddPostionComponent,
+    PostionDetailComponent,
 
     PositionComponent
   ],

@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 //import { filter } from 'rxjs/operators';
-import { sideBarMenus } from './side-bar-menus';
 import { Router, NavigationStart, Event as RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
@@ -91,15 +90,7 @@ export class WorkspaceComponent implements OnInit {
     }
   }
 
-  public data = sideBarMenus;
-  public field = {
-    dataSource: this.data,
-    id: 'nodeId',
-    text: 'nodeText',
-    child: 'nodeChild',
-    iconCss: 'iconCss',
-    tooltip: 'tooltip'
-  };
+
 
   // constructor() { }
   // ngOnInit(): void {
