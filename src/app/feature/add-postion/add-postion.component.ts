@@ -97,7 +97,7 @@ constructor(
   updatePosition(id: number) {
     this.crudservice.fetchPositionById(id).subscribe((positionData) => {
 
-      this.router.navigate(['/position/detail'], { queryParams: { position: JSON.stringify(positionData) } });
+      this.router.navigate(['position/create'], { queryParams: { position: JSON.stringify(positionData) } });
     });
 
   }
@@ -110,6 +110,8 @@ constructor(
       nzOnOk: () => {
         console.log('Deleting item with ID:', i);
         // Dispatch the delete action here
+        this.selectedPositionInfo = this.selectedPositionInfo?.filter(d => d.id !== i);
+
         this.store.dispatch(new DeletePositions(i)).subscribe(() => {
           window.location.reload();
         });
@@ -122,7 +124,7 @@ constructor(
 
   add(): void {
     if (this.selectedNodeId !== null) {
-      this.router.navigate(['/position/detail'], { queryParams: { nodeId: this.selectedNodeId } });
+      this.router.navigate(['position/create'], { queryParams: { nodeId: this.selectedNodeId } });
 
     } else {
       // Handle case when no node is selected

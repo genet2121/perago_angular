@@ -100,7 +100,7 @@ export class PositionComponent implements OnInit {
 
             this.dataForm.reset();
             this.store.dispatch(new GetPositions());
-            this.router.navigate(['/position/create']);
+            this.router.navigate(['/position/detail']);
 
           }, (error) => {
             console.error('Error updating position:', error);
@@ -114,7 +114,7 @@ export class PositionComponent implements OnInit {
             this.message.success('Position Created successfully')
             this.dataForm.reset();
             this.store.dispatch(new GetPositions());
-            this.router.navigate(['/position/create',]);
+            this.router.navigate(['/position/detail',]);
 
           }, (error) => {
             console.error('Error adding position:', error);

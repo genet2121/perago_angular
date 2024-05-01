@@ -11,12 +11,12 @@ import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
-  path: 'position/create',
+  path: 'position/detail',
   component: AddPostionComponent,
   data: { breadcrumb: 'Company/Organizational Structure' }
 },
 {
-  path: 'position/detail',
+  path: 'position/create',
   component: PositionComponent,
   data: { breadcrumb: 'position/create' }
 },
