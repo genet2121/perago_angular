@@ -1,9 +1,7 @@
 import { ItemData } from './../../core/models/data';
 import { Component, OnInit } from '@angular/core';
-import { NzFormatEmitEvent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
-import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
+import { NzFormatEmitEvent } from 'ng-zorro-antd/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { AfterViewInit,  } from '@angular/core';
 
 import { NzTreeFlatDataSource, NzTreeFlattener } from 'ng-zorro-antd/tree-view';
 import { Select, Store } from '@ngxs/store';
@@ -13,9 +11,10 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { DeletePositions, FetchPositionById, GetPositions, SelectNode } from 'src/app/core/state/actions/position.actions';
 import { TreeNode } from 'src/app/core/models/tree-nodeData';
-import { NzTreeModule } from 'ng-zorro-antd/tree';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { SelectionModel } from '@angular/cdk/collections';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
-;
 
 interface FlatNode {
   expandable: boolean;
@@ -37,7 +36,13 @@ export class AddPostionComponent implements OnInit {
   @Select(PositionState.selectSelectedPositionData) selectedPositionInfo$?:Observable<TreeNode[]>
   selectedNodeId: number | null = null;
   listOfData: ItemData[] = [];
-constructor(private router:Router, private store: Store, private crudservice:CrudService){
+constructor(
+  private router:Router,
+   private store: Store,
+   private crudservice:CrudService,
+   private message: NzMessageService,
+   private modalService: NzModalService
+  ){
 
 }
   // constructor() { }
@@ -73,11 +78,11 @@ constructor(private router:Router, private store: Store, private crudservice:Cru
     console.log('selectedNodeId', this.selectedNodeId);
     if (this.selectedNodeId !== null) {
       this.store.dispatch(new FetchPositionById(this.selectedNodeId));
-      this.selectedPositionInfo$?.subscribe((returnData: TreeNode[]) => {
-        // Check if returnData is an array and not empty
-        if (Array.isArray(returnData) && returnData.length > 0) {
+      this.selectedPositionInfo$?.subscribe((returnData: TreeNode[] | undefined) => {
+        // Check if returnData is defined and not empty
+        if (returnData && returnData.length > 0) {
           // Extract children from the first element of the array
-          this.selectedPositionInfo = returnData[0].children;
+          this.selectedPositionInfo = returnData[0].children || [];
         } else {
           console.log('No children found for the selected node');
           this.selectedPositionInfo = []; // Clear the list if no children found
@@ -88,7 +93,8 @@ constructor(private router:Router, private store: Store, private crudservice:Cru
       this.listOfData = []; // Clear the list if selectedNodeId is null
     }
   }
-  updatePositionn(id: number) {
+
+  updatePosition(id: number) {
     this.crudservice.fetchPositionById(id).subscribe((positionData) => {
 
       this.router.navigate(['/position/detail'], { queryParams: { position: JSON.stringify(positionData) } });
@@ -96,16 +102,34 @@ constructor(private router:Router, private store: Store, private crudservice:Cru
 
   }
   deletePosition(i: number) {
-    console.log("The i value is:-", i);
-    this.store.dispatch(new DeletePositions(i));
+
+    this.modalService.confirm({
+      nzTitle: 'Are you sure you want to delete this item?',
+      nzOkText: 'Yes',
+
+      nzOnOk: () => {
+        console.log('Deleting item with ID:', i);
+        // Dispatch the delete action here
+        this.store.dispatch(new DeletePositions(i)).subscribe(() => {
+          window.location.reload();
+        });
+      },
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel delete')
+    });
   }
+
 
   add(): void {
     if (this.selectedNodeId !== null) {
       this.router.navigate(['/position/detail'], { queryParams: { nodeId: this.selectedNodeId } });
+
     } else {
       // Handle case when no node is selected
       console.error('No node selected.');
+      this.message.error('Please Select the Position you want add child!');
+      //this.message.warning('First select node')
+
     }}
   // onNodeClick(node: any): void {
   //   this.selectedNodeId = node.id;
@@ -132,15 +156,14 @@ constructor(private router:Router, private store: Store, private crudservice:Cru
 
   dataSource = new NzTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  showLeafIcon = false;
-  // constructor() {
-  //   this.dataSource.setData(TREE_DATA);
-  // }
 
   hasChild = (_: number, node: FlatNode): boolean => node.expandable;
 
+  selectListSelection = new SelectionModel<FlatNode>();
+
   ngAfterViewInit(): void {
     this.treeControl.expandAll();
+
   }
 
   getNode(name: string): FlatNode | null {
@@ -153,35 +176,3 @@ constructor(private router:Router, private store: Store, private crudservice:Cru
 }
 
 
-// interface TreeNode {
-//   name: string;
-//   children?: TreeNode[];
-// }
-
-// TREE_DATA: TreeNode[]
-// = [
-//   {
-//     name: 'parent 1',
-//     children: [
-//       {
-//         name: 'parent 1-0',
-//         children: [{ name: 'leaf' }, { name: 'leaf' }]
-//       },
-//       {
-//         name: 'parent 1-1',
-//         children: [
-//           { name: 'leaf' },
-//           {
-//             name: 'parent 1-1-0',
-//             children: [{ name: 'leaf' }, { name: 'leaf' }]
-//           },
-//           { name: 'leaf' }
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     name: 'parent 2',
-//     children: [{ name: 'leaf' }, { name: 'leaf' }]
-//   }
-// ]

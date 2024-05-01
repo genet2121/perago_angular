@@ -4,14 +4,10 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 
 import { tap } from 'rxjs/operators';
 import { AddPositions, DeletePositions, FetchPositionById, GetPositions, UpdatePositions, SelectNode } from '../actions/position.actions';
+import { PositioStateModel } from '../../models/PositionalState';
 
 
-export class PositioStateModel {
-  positions: any
-  selectedNodeId?: number | null;
-  selectedPosition:any
 
-}
 
 @State<PositioStateModel>({
     name: 'positionstate',
@@ -77,8 +73,6 @@ export class PositionState {
         return this.crudservice.deletePosition(id).pipe(tap(returnData => {
             const state=ctx.getState();
             console.log("The is is",id)
-            //Here we will create a new Array called filteredArray which won't contain the given id and set it equal to state.todo
-           // const filteredArray=state.positions.filter(contents=>contents.id!==id);
 
             const filteredArray = state.positions.filter((contents: any) => contents.id !== id);
 

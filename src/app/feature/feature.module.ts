@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AddPostionComponent } from './add-postion/add-postion.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgZorroAntdModule } from '../ng-zorro-antd/ng-zorro-antd.module';
-import { PositionDetailComponent } from './position-detail/position-detail.component';
 import { PositionComponent } from './position/position.component';
 import { NgxsModule } from '@ngxs/store';
 import { PositionState } from '../core/state/state/position.state';
@@ -24,10 +23,7 @@ const routes: Routes = [
 {path:'position/detail/:id',
   component:PositionComponent
 },
-{
-  path:'position/list',
-  component:PositionDetailComponent
-}
+
 
 
 
@@ -36,7 +32,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AddPostionComponent,
-    PositionDetailComponent,
+
     PositionComponent
   ],
   imports: [

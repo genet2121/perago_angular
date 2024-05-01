@@ -6,6 +6,7 @@ import { AddPositions, GetPositions, UpdatePositions } from 'src/app/core/state/
 import { PositionState } from 'src/app/core/state/state/position.state';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-position',
@@ -19,7 +20,7 @@ export class PositionComponent implements OnInit {
   selectedNodeId: number | null = null;
 
   @Select(PositionState.selectStateData) positionInfo$?: Observable<any>
-  constructor(private fb:FormBuilder, private store: Store, private route: ActivatedRoute, private router: Router
+  constructor(private fb:FormBuilder, private store: Store, private route: ActivatedRoute, private router: Router, private message: NzMessageService
   ) {
     this.route.queryParams.subscribe(params => {
       this.selectedNodeId = params['nodeId'];
@@ -95,6 +96,7 @@ export class PositionComponent implements OnInit {
         this.store.dispatch(new UpdatePositions(formData, formData.id, 0))
           .subscribe(() => {
             console.log('Position updated successfully');
+          this.message.success('Position updated successfully');
 
             this.dataForm.reset();
             this.store.dispatch(new GetPositions());
@@ -102,18 +104,21 @@ export class PositionComponent implements OnInit {
 
           }, (error) => {
             console.error('Error updating position:', error);
+            this.message.error('Error updating position:', error)
           });
       } else {
         // Add new position
         this.store.dispatch(new AddPositions(formData))
           .subscribe(() => {
             console.log('Position added successfully');
+            this.message.success('Position Created successfully')
             this.dataForm.reset();
             this.store.dispatch(new GetPositions());
             this.router.navigate(['/position/create',]);
 
           }, (error) => {
             console.error('Error adding position:', error);
+            this.message.error('Error adding position:', error);
           });
       }
     } else {

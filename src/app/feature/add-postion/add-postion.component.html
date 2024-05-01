@@ -3,42 +3,58 @@
 
 
 <div nz-row>
-  <div nz-col [nzSpan]="18" [nzPush]="6">
-    <button nz-button (click)="add()" nzType="primary">Add</button>
-    <br />
-    <br />
-    <nz-table #editRowTable nzBordered [nzData]="listOfData">
-      <thead>
-        <tr>
-          <th nzWidth="30%">Name</th>
-          <th>ParentId</th>
-          <th>Description</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of selectedPositionInfo; index as i" class="editable-row">
-          <td>{{data.name}}</td>
-          <td>{{data.parentId}}</td>
-          <td>{{data.description}}</td>
-          <td>
-            <button class="text-yellow-500 hover:bg-yellow-100 font-bold py-2 px-4 rounded" (click)="updatePositionn(data.id)">
-              <i nz-icon nzType="edit" class="text-lg"></i>
-            </button>
-            <button class="text-red-500 hover:bg-red-100 font-bold py-2 px-4 rounded ml-2" (click)="deletePosition(data.id)">
-              <i nz-icon nzType="delete" class="text-lg"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
+
+<div nz-col [nzSpan]="18" [nzPush]="6">
+  <button nz-button (click)="add()" nzType="primary">Add</button>
+  <br />
+  <br />
+  <!-- *ngIf="selectedPositionInfo && selectedPositionInfo.length > 0" -->
+  <nz-table *ngIf="selectedPositionInfo && selectedPositionInfo.length > 0" nzTemplateMode>
+    <thead>
+      <tr>
+        <th nzWidth="20%">Name</th>
+        <!-- <th>ParentId</th> -->
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of selectedPositionInfo; index as i">
+        <td>{{ data.name }}</td>
+        <!-- <td>{{ data.parentId }}</td> -->
+        <td>{{ data.description }}</td>
+        <td>
+          <button class="text-yellow-500 hover:bg-yellow-100 font-bold py-2 px-4 rounded" (click)="updatePosition(data.id)">
+            <i nz-icon nzType="edit" class="text-lg"></i>
+          </button>
+          <button class="text-red-500 hover:bg-red-100 font-bold py-2 px-4 rounded ml-2"
+
+
+            (click)="deletePosition(data.id)">
+            <i nz-icon nzType="delete" class="text-lg"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <!-- Message and image when no data available -->
+  <div *ngIf="selectedPositionInfo && selectedPositionInfo.length === 0" class="no-data-message">
+
+    <p >Have No Data available</p>
   </div>
+
+</div>
 
   <div class="content" nz-col [nzSpan]="6" [nzPull]="18">
     <div class="tree-view-container">
       <nz-tree-view [nzTreeControl]="treeControl" [nzDataSource]="dataSource">
         <nz-tree-node *nzTreeNodeDef="let node" nzTreeNodeIndentLine>
-          <nz-tree-node-option (click)="onNodeClick(node)">
+          <nz-tree-node-option
+          (click)="onNodeClick(node)"
+          (nzClick)="selectListSelection.toggle(node)"
+          [nzSelected]="selectListSelection.isSelected(node)"
+          >
             {{ node.name }}
           </nz-tree-node-option>
         </nz-tree-node>
@@ -47,7 +63,11 @@
           <nz-tree-node-toggle>
             <span nz-icon [nzType]="treeControl.isExpanded(node) ? 'minus-square' : 'plus-square'" nzTheme="outline"></span>
           </nz-tree-node-toggle>
-          <nz-tree-node-option (click)="onNodeClick(node)">
+          <nz-tree-node-option
+          (click)="onNodeClick(node)"
+          [nzSelected]="selectListSelection.isSelected(node)"
+          (nzClick)="selectListSelection.toggle(node)"
+          >
             {{ node.name }}
           </nz-tree-node-option>
         </nz-tree-node>
@@ -59,14 +79,3 @@
 
 
 
-<!-- <nz-tree [nzData]="nodes" [nzShowLine]="true" (nzClick)="handleNodeClick($event)"></nz-tree> -->
-<!-- Example HTML template with Tailwind CSS classes -->
-
-<!-- <div nz-row>
-  <div nz-col nzFlex="2">2 / 5</div>
-  <div nz-col nzFlex="3">3 / 5</div>
-</div> -->
-  <!-- <nz-tree
-    [nzData]="nodes" nzShowLine
-    (nzClick)="nzEvent($event)">
-  </nz-tree> -->
