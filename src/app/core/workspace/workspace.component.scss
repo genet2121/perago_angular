@@ -8,7 +8,10 @@
   height: 100vh; /* Set height to full viewport height */
 }
 .menu-sidebar {
-  height: 100%; /* Make the sidebar take up full height */
+  height: 100%;
+ // background: rgba(1, 0, 10, 0);
+
+  /* Make the sidebar take up full height */
 }
 .inner-content {
   padding: 24px; /* Add padding to the inner content */
@@ -34,7 +37,10 @@
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
+.sidebar{
+  background: rgba(255, 255, 255, 0.2);
 
+}
 nz-header {
   background: #fff;
   padding: 0;
