@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Select, Store } from '@ngxs/store';
 import { Observable, map } from 'rxjs';
 import { AddPositions, GetPositions, UpdatePositions } from 'src/app/core/state/actions/position.actions';
 import { PositionState } from 'src/app/core/state/state/position.state';
-import { NzFormModule } from 'ng-zorro-antd/form';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
@@ -18,39 +17,41 @@ export class PositionComponent implements OnInit {
   positionInfo?: [] ;
   positionData: any;
   selectedNodeId: number | null = null;
+  mode?: 'add' | 'update' ;
 
   @Select(PositionState.selectStateData) positionInfo$?: Observable<any>
-  constructor(private fb:FormBuilder, private store: Store, private route: ActivatedRoute, private router: Router, private message: NzMessageService
+  constructor(private fb:FormBuilder,
+     private store: Store,
+     private route: ActivatedRoute,
+     private router: Router,
+     private message: NzMessageService,
+
   ) {
     this.route.queryParams.subscribe(params => {
       this.selectedNodeId = params['nodeId'];
 
-      // Now you can use the nodeId as needed in your component
     });
-    this.dataForm = fb.group({
-      id:[],
-      parentId:[this.selectedNodeId],
-      name:['', Validators.required],
-      description:['']
-    })
-    this.store.dispatch(new GetPositions());
+    this.dataForm = this.fb.group({
+      id: [],
+      parentId: [this.selectedNodeId],
+      name: ['', Validators.required],
+      description: ['']
+    });
 
-    this.positionInfo$?.subscribe((returnData) => {
-      this.positionInfo = returnData;
-    })
 
     this.route.queryParams.pipe(
-      map((params) => JSON.parse(params['position']))
+      map((params) => params['position'] ? JSON.parse(params['position']) : null)
     ).subscribe((positionData) => {
-      this.positionData = positionData;
-      this.populateFormWithPositionData();
+      if (positionData) {
+        this.positionData = positionData;
+        this.populateFormWithPositionData();
+        this.mode = 'update';
+      } else {
+        this.mode = 'add';
+      }
     });
 
-    this.store.dispatch(new GetPositions());
 
-    this.positionInfo$?.subscribe((returnData) => {
-      this.positionInfo = returnData;
-    });
   }
 
   ngOnInit(): void {
@@ -67,57 +68,30 @@ export class PositionComponent implements OnInit {
     }
   }
 
-  // addPosition() {
-  //   console.log(this.dataForm.value)
-  //   //this.store.dispatch(new AddPositions(this.dataForm.value));
-
-  //     if (this.dataForm.valid) {
-  //       const formData = this.dataForm.value;
-  //       this.store.dispatch(new AddPositions(formData))
-  //         .subscribe(() => {
-  //           console.log('Position added successfully');
-  //           this.dataForm.reset();
-  //           this.store.dispatch(new GetPositions());
-  //           this.dataForm.reset();
-
-  //         }, (error) => {
-  //           console.error('Error adding position:', error);
-  //         });
-  //     } else {
-  //       this.markFormGroupTouched(this.dataForm);
-  //     }
-  //   }
   addPosition() {
     if (this.dataForm.valid) {
       const formData = this.dataForm.value;
 
-      if (formData.id) {
-        // Update existing position
+      if (this.mode === 'update') {
+
         this.store.dispatch(new UpdatePositions(formData, formData.id, 0))
           .subscribe(() => {
-            console.log('Position updated successfully');
-          this.message.success('Position updated successfully');
-
+            this.message.success('Position updated successfully');
             this.dataForm.reset();
             this.store.dispatch(new GetPositions());
             this.router.navigate(['/position/detail']);
-
           }, (error) => {
-            console.error('Error updating position:', error);
-            this.message.error('Error updating position:', error)
+            this.message.error('Error updating position:', error);
           });
       } else {
-        // Add new position
+
         this.store.dispatch(new AddPositions(formData))
           .subscribe(() => {
-            console.log('Position added successfully');
-            this.message.success('Position Created successfully')
+            this.message.success('Position Created successfully');
             this.dataForm.reset();
             this.store.dispatch(new GetPositions());
-            this.router.navigate(['/position/detail',]);
-
+            this.router.navigate(['/position/detail']);
           }, (error) => {
-            console.error('Error adding position:', error);
             this.message.error('Error adding position:', error);
           });
       }
@@ -125,6 +99,7 @@ export class PositionComponent implements OnInit {
       this.markFormGroupTouched(this.dataForm);
     }
   }
+
     markFormGroupTouched(formGroup: FormGroup): void {
       Object.values(formGroup.controls).forEach(control => {
         control.markAsTouched();

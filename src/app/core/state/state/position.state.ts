@@ -38,7 +38,7 @@ export class PositionState {
 
             ctx.setState({
                 ...state,
-                positions: returnData //here the data coming from the API will get assigned to the users variable inside the appstate
+                positions: returnData
             })
         }))
     }
@@ -86,11 +86,11 @@ export class PositionState {
 fetchPositionById(ctx: StateContext<PositioStateModel>, { id }: FetchPositionById) {
   return this.crudservice.fetchPositionById(id).pipe(tap(returnData => {
     const state = ctx.getState();
-    // Update the state with the fetched position
+
     ctx.setState({
       ...state,
       selectedPosition: [returnData]
-      // Assuming the API returns a single position object
+
     });
     console.log('uuuuu',returnData)
   }));

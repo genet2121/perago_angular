@@ -16,10 +16,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('../feature/feature.module').then((m) => m.FeatureModule),
   },]
-// {
-//   path: "settings",
-//   loadChildren:() => import('./settings/settings.module').then((m)=>m.SettingsModule)
-// },
+
 @NgModule({
   declarations: [
     WorkspaceComponent

@@ -10,20 +10,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
-//   {
-//   path: 'position/detail',
-//   component: PostionDetailComponent,
-//   data: { breadcrumb: 'Company/Organizational Structure' }
-// },
-// {
-//   path: 'position/create',
-//   component: PositionComponent,
-//   data: { breadcrumb: 'position/create' }
-// },
-// {path:'position/detail/:id',
-//   component:PositionComponent
-// },
-
 {
   path: 'position/detail',
   component: PostionDetailComponent,
@@ -34,10 +20,7 @@ const routes: Routes = [
   component: PositionComponent,
   data: { breadcrumb: 'Position Form' }
 },
-{ path: 'position/detail/:id',
-  component: PositionComponent,
-  data: { breadcrumb: 'Position Details' }
-}
+
 
 
 ]

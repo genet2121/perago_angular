@@ -10,12 +10,11 @@ import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgZorroAntdModule } from './ng-zorro-antd/ng-zorro-antd.module';
-import { MenuComponent } from './menu/menu.component';
 import { CoreModule } from './core/core.module';
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
